@@ -11,6 +11,7 @@ mkdir -p /multicraft/data
 mkdir -p /multicraft/servers
 mkdir -p /multicraft/templates
 mkdir -p /multicraft/configs
+mkdir -p /multicraft/html
 
 # Change multicraft owner to nobody:users
 chown -R nobody:users /multicraft/
@@ -99,6 +100,31 @@ else
     chmod 777 /multicraft/configs/panel.php
     ln -s /multicraft/configs/panel.php /var/www/html/multicraft/protected/config/config.php
 fi
+
+#######
+
+## Apache Config
+
+#######
+if [ ! -f /multicraft/configs/apache.conf ]; then
+    echo "[$(date +%Y-%m-%d_%T)] - No Apache config file found. Creating one from template."
+
+    cp /etc/apache2/sites-enabled/000-default.conf /multicraft/configs/apache.conf
+    rm /etc/apache2/sites-enabled/000-default.conf
+
+    ln -s /multicraft/configs/apache.conf /etc/apache2/sites-enabled/000-default.conf
+
+else
+    echo "[$(date +%Y-%m-%d_%T)] - Apache Config File found. Creating symbolic link"
+
+    # If config file already exist in sites-enabled, delete it first.
+    if [ -f /etc/apache2/sites-enabled/000-default.conf ]; then
+        rm /etc/apache2/sites-enabled/000-default.conf
+    fi
+
+    ln -s /multicraft/configs/apache.conf /etc/apache2/sites-enabled/000-default.conf
+fi
+
 
 # Start apache2
 service apache2 start
