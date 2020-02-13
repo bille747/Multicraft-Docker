@@ -42,7 +42,7 @@ RUN chmod +x /scripts/entrypoint.sh
 
 # Exposed ports and Volumes required
 EXPOSE 80
-EXPOSE 443
+EXPOSE 21
 EXPOSE 25565
 EXPOSE 19132-19133/udp
 EXPOSE 25565/udp
