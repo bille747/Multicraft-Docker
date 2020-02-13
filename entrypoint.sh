@@ -59,7 +59,7 @@ fi
 #######
 if [ ! -f /multicraft/configs/panel.php ]; then
     echo "[$(date +%Y-%m-%d_%T)] - No Multicraft Panel config file found. Creating new one from config.php.dist";
-    cp -f /var/www/html/protected/config/config.php.dist /multicraft/configs/panel.php
+    cp -f /var/www/html/multicraft/protected/config/config.php.dist /multicraft/configs/panel.php
 
     if [ "$dbengine" == "mysql" ]; then
         # Set Panel settings.
@@ -90,14 +90,14 @@ if [ ! -f /multicraft/configs/panel.php ]; then
     # Copy config file to the panel folder.
     chown nobody:users /multicraft/configs/panel.php
     chmod 777 /multicraft/configs/panel.php
-    ln -s /multicraft/configs/panel.php /var/www/html/protected/config/config.php
-    #install -C -o www-data -g www-data /multicraft/configs/panel.php /var/www/html/protected/config/config.php
+    ln -s /multicraft/configs/panel.php /var/www/html/multicraft/protected/config/config.php
+    
 
 else
     echo "[$(date +%Y-%m-%d_%T)] - Multicraft Panel config file found. Creating symbolic link"
     chown nobody:users /multicraft/configs/panel.php
     chmod 777 /multicraft/configs/panel.php
-    ln -s /multicraft/configs/panel.php /var/www/html/protected/config/config.php
+    ln -s /multicraft/configs/panel.php /var/www/html/multicraft/protected/config/config.php
 fi
 
 # Start apache2
@@ -117,7 +117,7 @@ if [ "$NEWINSTALL" == 1 ]; then
 
 else
     # Remove install.php since it is not needed.
-    rm /var/www/html/install.php
+    rm /var/www/html/multicraft/install.php
 fi
 
 # Remove data folder to replace with symlink

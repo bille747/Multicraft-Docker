@@ -1,7 +1,14 @@
 #!/bin/bash
 umask 000
+
+# Enable Apache Rewrite
+a2enmod rewrite
+
+# Create the Panel WebFolder
+mkdir -p /var/www/html/multicraft
+
 # Copy the web files over to the html folder
-cp -rf /tmp/multicraft/panel/* /var/www/html/
+cp -rf /tmp/multicraft/panel/* /var/www/html/multicraft
 
 # Update website owner to www-data:www-data
 chown -R www-data:www-data /var/www/html/
