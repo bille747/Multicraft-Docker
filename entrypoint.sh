@@ -147,17 +147,29 @@ else
 fi
 
 # Remove data folder to replace with symlink
+if [ -d /opt/multicraft/data ]; then
 rm -r /opt/multicraft/data
+fi
 ln -s /multicraft/data /opt/multicraft/data
+echo "[$(date +%Y-%m-%d_%T)] - Symlinked Data"
 
+if [ -d /opt/multicraft/jar ]; then
 rm -r /opt/multicraft/jar
+fi
 ln -s /multicraft/jar /opt/multicraft/jar
+echo "[$(date +%Y-%m-%d_%T)] - Symlinked Jar"
 
+if [ -d /opt/multicraft/servers ]; then
 rm -r /opt/multicraft/servers
+fi
 ln -s /multicraft/servers /opt/multicraft/servers
+echo "[$(date +%Y-%m-%d_%T)] - Symlinked Servers"
 
+if [ -d /opt/multicraft/templates ]; then
 rm -r /opt/multicraft/templates
+fi
 ln -s /multicraft/templates /opt/multicraft/templates
+echo "[$(date +%Y-%m-%d_%T)] - Symlinked Templates"
 
 # Start and stop Multicraft to set permissions
 /opt/multicraft/bin/multicraft start
